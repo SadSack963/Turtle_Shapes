@@ -2,6 +2,7 @@ from turtle import Turtle, Screen
 
 colors = ["silver", "red", "yellow", "green", "blue", "cyan", "white",]
 _shapes = {
+    "crosshairs": ((0, 0), (-15, 0), (0, 0), (15, 0), (0, 0), (0, -15), (0, 0), (0, 15)),
     "arrow": ((-10, 0), (10, 0), (0, 10)),
     "turtle": ((0, 16), (-2, 14), (-1, 10), (-4, 7),
                (-7, 9), (-9, 8), (-6, 5), (-7, 1), (-5, -3), (-8, -6),
@@ -24,16 +25,19 @@ _shapes = {
 screen = Screen()
 screen.setup(width=700, height=400)
 screen.bgcolor("black")
+screen.addshape("crosshairs", _shapes["crosshairs"])
 i = 0
 for shape in _shapes:
     tim = Turtle(shape=shape)
     tim.color(colors[i])
+    tim.penup()
     i += 1
     for item in _shapes[shape]:
         # print(f'{item = }')
         x = item[0] * 10
         y = item[1] * 10
         tim.goto(x, y)
+        tim.pendown()
     tim.goto(_shapes[shape][0][0] * 10, _shapes[shape][0][1] * 10)
     tim.hideturtle()
 screen.exitonclick()
